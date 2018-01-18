@@ -1,0 +1,11 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "hyperledger/fabric-couchdb:x86_64-1.1.0-preview"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "5984"
+    }
+  ]
+}
