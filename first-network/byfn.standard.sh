@@ -192,6 +192,7 @@ function replacePrivateKey () {
 
 # Generates Org certs using cryptogen tool
 function generateCerts (){
+echo "Path: ${PATH}"
   which cryptogen
   if [ "$?" -ne 0 ]; then
     echo "cryptogen tool not found. exiting"

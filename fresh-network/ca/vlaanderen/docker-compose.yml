@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  ca:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=~/
+      - FABRIC_CA_SERVER_CA_NAME=ca.block-chain.vlaanderen
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.block-chain.vlaanderen.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ca.block-chain.vlaanderen.key
+    ports:
+      - "7054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    container_name: ca.block-chain.vlaanderen
+
+    # To be mounted from S3: /etc/hyperledger/fabric-ca-server-config/

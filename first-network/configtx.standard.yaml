@@ -22,20 +22,15 @@ Profiles:
         Consortiums:
             SampleConsortium:
                 Organizations:
-                    - *Vlaanderen
-                    - *Brussels
-        Application:
-            <<: *ApplicationDefaults
-            Organizations:
-                - *Vlaanderen
-                - *Brussels
+                    - *Org1
+                    - *Org2
     TwoOrgsChannel:
         Consortium: SampleConsortium
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Vlaanderen
-                - *Brussels
+                - *Org1
+                - *Org2
 
 ################################################################################
 #
@@ -58,40 +53,40 @@ Organizations:
         ID: OrdererMSP
 
         # MSPDir is the filesystem path which contains the MSP configuration
-        MSPDir: crypto-config/ordererOrganizations/block-chain.vlaanderen/msp
+        MSPDir: crypto-config/ordererOrganizations/example.com/msp
 
-    - &Vlaanderen
+    - &Org1
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: VlaanderenMSP
+        Name: Org1MSP
 
         # ID to load the MSP definition as
-        ID: VlaanderenMSP
+        ID: Org1MSP
 
-        MSPDir: crypto-config/peerOrganizations/block-chain.vlaanderen/msp
+        MSPDir: crypto-config/peerOrganizations/org1.example.com/msp
 
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
-            - Host: peer0.block-chain.vlaanderen
+            - Host: peer0.org1.example.com
               Port: 7051
 
-    - &Brussels
+    - &Org2
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: BrusselsMSP
+        Name: Org2MSP
 
         # ID to load the MSP definition as
-        ID: BrusselsMSP
+        ID: Org2MSP
 
-        MSPDir: crypto-config/peerOrganizations/block-chain.brussels/msp
+        MSPDir: crypto-config/peerOrganizations/org2.example.com/msp
 
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
-            - Host: peer0.block-chain.brussels
+            - Host: peer0.org2.example.com
               Port: 7051
 
 ################################################################################
@@ -109,7 +104,7 @@ Orderer: &OrdererDefaults
     OrdererType: solo
 
     Addresses:
-        - orderer.block-chain.vlaanderen:7050
+        - orderer.example.com:7050
 
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s
@@ -133,7 +128,7 @@ Orderer: &OrdererDefaults
         # Brokers: A list of Kafka brokers to which the orderer connects
         # NOTE: Use IP:port notation
         Brokers:
-            - orderer.block-chain.vlaanderen:9092
+            - 127.0.0.1:9092
 
     # Organizations is the list of orgs which are defined as participants on
     # the orderer side of the network

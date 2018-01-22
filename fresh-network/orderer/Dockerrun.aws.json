@@ -1,0 +1,17 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "hyperledger/fabric-orderer:x86_64-1.1.0-preview"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "7050"
+    }
+  ],
+  "Volumes": [
+    {
+      "HostDirectory": "/etc/hyperledger",
+      "ContainerDirectory": "/etc/hyperledger"
+    }
+  ]
+}

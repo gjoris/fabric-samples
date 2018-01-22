@@ -192,6 +192,7 @@ function replacePrivateKey () {
 
 # Generates Org certs using cryptogen tool
 function generateCerts (){
+echo "Path: ${PATH}"
   which cryptogen
   if [ "$?" -ne 0 ]; then
     echo "cryptogen tool not found. exiting"
@@ -279,22 +280,22 @@ function generateChannelArtifacts() {
 
   echo
   echo "#################################################################"
-  echo "#######    Generating anchor peer update for Org1MSP   ##########"
+  echo "#######    Generating anchor peer update for VlaanderenMSP   ##########"
   echo "#################################################################"
-  configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
+  configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/VlaanderenMSPanchors.tx -channelID $CHANNEL_NAME -asOrg VlaanderenMSP
   if [ "$?" -ne 0 ]; then
-    echo "Failed to generate anchor peer update for Org1MSP..."
+    echo "Failed to generate anchor peer update for VlaanderenMSP..."
     exit 1
   fi
 
   echo
   echo "#################################################################"
-  echo "#######    Generating anchor peer update for Org2MSP   ##########"
+  echo "#######    Generating anchor peer update for BrusselsMSP   ##########"
   echo "#################################################################"
   configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate \
-  ./channel-artifacts/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
+  ./channel-artifacts/BrusselsMSPanchors.tx -channelID $CHANNEL_NAME -asOrg BrusselsMSP
   if [ "$?" -ne 0 ]; then
-    echo "Failed to generate anchor peer update for Org2MSP..."
+    echo "Failed to generate anchor peer update for BrusselsMSP..."
     exit 1
   fi
   echo

@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  orderer.block-chain.vlaanderen:
+    container_name: orderer.block-chain.vlaanderen
+    image: hyperledger/fabric-orderer
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=debug
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/etc/hyperledger/configtx/genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/etc/hyperledger/msp/orderer/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
+    command: orderer
+    ports:
+      - 7050:7050
+    volumes:
+        - ./config/:/etc/hyperledger/configtx
+        - ./crypto-config/ordererOrganizations/block-chain.vlaanderen/orderers/orderer.block-chain.vlaanderen/:/etc/hyperledger/msp/orderer
+        - ./crypto-config/peerOrganizations/block-chain.vlaanderen/peers/peer0.block-chain.vlaanderen/:/etc/hyperledger/msp/peerVlaanderen
+
+
+    # To be mounted from S3:
+    #         /etc/hyperledger/configtx/
